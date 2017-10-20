@@ -6,7 +6,7 @@
     <name>Geo Locator</name>
 
     <description>
-        The Applications finds and displays the users current location 
+        The Applications finds and displays the users current location
     </description>
 
     <author href="http://npontu.com.com" email="snwolley@gmail.com">ASHESI</author>
@@ -41,7 +41,7 @@
     <plugin name="cordova-plugin-geolocation" />
 
     <!-- Define app icon for each platform. -->
-    <icon src="icon.png" />
+    <icon src="mapicon.png" />
     <icon src="res/icon/android/icon-36-ldpi.png"   gap:platform="android"    gap:qualifier="ldpi" />
     <icon src="res/icon/android/icon-48-mdpi.png"   gap:platform="android"    gap:qualifier="mdpi" />
     <icon src="res/icon/android/icon-72-hdpi.png"   gap:platform="android"    gap:qualifier="hdpi" />
