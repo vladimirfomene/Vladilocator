@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
-    <title>Geo-Locator</title>
+    <title>Vladilocator</title>
 
     <link rel="stylesheet"  href="css/jquery.mobile.structure.css" />
     <link rel="stylesheet" href="css/jquery.mobile.theme.css" />
@@ -13,17 +13,70 @@
     <script src="js/app/app.js"></script>
     <script src="js/app/bootstrap.js"></script>
     <script src="js/lib/jquery.mobile.js"></script>
-
-    <!--Javascript file containing the Assingment code-->
     <script src="js/custom.js"></script>
+
+    <script>
+      //Google map initialization
+      var map = null;
+      var marker = null;
+      function initMap(){
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position){
+
+            var mapOptions = {
+              center: new google.maps.LatLng(position.coords.latitude,position.coords.longitude),
+              zoom: 12,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+
+          });
+        } else {
+          alert("There is no location support on your browser.");
+        }
+
+      }
+
+      window.onload = function(){
+        document.getElementById("location-btn").addEventListener("click", function(){
+          if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position){
+
+              if(marker === null){
+
+                var markerOptions = {
+                  position: new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
+                };
+
+                marker = new google.maps.Marker(markerOptions);
+
+                marker.setMap(map);
+              }else{
+                marker.setMap(null);
+                marker = null;
+              }
+            });
+
+
+          }else{
+            alert("There is no location support on your browser");
+          }
+        });
+
+      };
+
+    </script>
+
   </head>
   <body>
-    <!--CSS Selector for displaying the google map-->
-    <div id="map"></div>
-
-    <!-- Google maps Javascript API link-->
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD7E4ubdcAlNuBF_FXcohXR4qjWBKJolhI&callback=initMap">
-    </script>
+    <div id="map">
+    </div>
+    <button style="text-align: center;" id="location-btn">Pin Location</button>
+    <!-- Google maps javascript api -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDi5XLlJPvGIvOx3lia08f307ahecCQhXM&callback=initMap"
+    async defer></script>
   </body>
 </html>
